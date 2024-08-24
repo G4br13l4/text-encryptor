@@ -1,28 +1,52 @@
-console.log("hola gabo");
-// let numeroSecreto = generarNumeroSecreto();
-// let intentos = 0;
+function getUserInputValue() {
+  const userInput = document.getElementById("user-text");
+  return userInput.value;
+}
 
-// console.log(numeroSecreto);
+function assignTextToInput(text) {
+  let resultInput = document.getElementById("result");
+  resultInput.value = text;
+  return;
+}
 
-// function asignarTextoElemento(elemento, texto) {
-//     let elementoHTML = document.querySelector(elemento);
-//     elementoHTML.innerHTML = texto;
-//     return;
-// }
+function encriptText() {
+  const text = getUserInputValue().toLowerCase().split("");
+  const encriptedText = text.map((letter) => {
+    switch (letter) {
+      case "a":
+        return "ai";
+      case "e":
+        return "enter";
+      case "i":
+        return "imes";
+      case "o":
+        return "ober";
+      case "u":
+        return "ufat";
+      default:
+        return letter;
+    }
+  });
+  assignTextToInput(encriptedText.join(""));
+}
 
-// function verificarIntento() {
-//     let numeroDeUsuario = parseInt(document.getElementById('valorUsuario').value);
+function decryptText() {
+  const text = getUserInputValue().toLowerCase();
+  let decryptedText = text;
 
-//     if (numeroDeUsuario === numeroSecreto) {
-//         console.log('Acertaste el número!');
-//     }
-//     return;
-// }
-
-// function generarNumeroSecreto() {
-//     return Math.floor(Math.random()*10)+1;
-
-// }
-
-// asignarTextoElemento('h1','Juego del número secreto!');
-// asignarTextoElemento('p',`Indica un número del 1 al 10`);
+  while (
+    decryptedText.includes("ai") ||
+    decryptedText.includes("enter") ||
+    decryptedText.includes("imes") ||
+    decryptedText.includes("ober") ||
+    decryptedText.includes("ufat")
+  ) {
+    decryptedText = decryptedText
+      .replace("ai", "a")
+      .replace("enter", "e")
+      .replace("imes", "i")
+      .replace("ober", "o")
+      .replace("ufat", "u");
+  }
+  assignTextToInput(decryptedText);
+}
